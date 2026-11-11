@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Bus Route & Fare Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-icon">🚌</span><div><strong>RouteWise</strong><small>College Bus Management</small></div></div>
+    <nav><a href="#dashboard">Dashboard</a><a href="#routes">Routes</a><a href="#manage">Manage</a></nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">DATA STRUCTURES MINI PROJECT</p>
+        <h1>College Bus Route<br><span>& Fare Management</span></h1>
+        <p class="hero-copy">Manage routes, stops and annual fees with a linked-list based system and a stack-powered undo feature.</p>
+        <a class="primary-link" href="#routes">Explore routes <span>→</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="road"></div><div class="bus">🚌</div><div class="pin pin-one">●</div><div class="pin pin-two">●</div></div>
+    </section>
+
+    <section id="dashboard" class="stats">
+      <article class="stat-card"><div class="stat-icon purple">⌖</div><div><span>Total routes</span><strong id="routeCount">0</strong></div></article>
+      <article class="stat-card"><div class="stat-icon blue">↗</div><div><span>Total stops</span><strong id="stopCount">0</strong></div></article>
+      <article class="stat-card"><div class="stat-icon green">₹</div><div><span>Highest annual fee</span><strong id="highestFee">₹0</strong></div></article>
+    </section>
+
+    <section id="routes" class="section">
+      <div class="section-heading"><div><p class="eyebrow">LIVE LINKED LIST</p><h2>Bus routes</h2></div><button class="outline-btn" id="resetBtn">Restore sample data</button></div>
+      <div id="routeCards" class="route-grid"></div>
+    </section>
+
+    <section id="manage" class="section">
+      <div class="section-heading"><div><p class="eyebrow">SYSTEM OPERATIONS</p><h2>Manage your routes</h2></div><span class="tag">Linked List + Stack</span></div>
+      <div class="tools-grid">
+        <article class="panel">
+          <h3>Add a route</h3>
+          <form id="routeForm"><label>Route name<input id="routeName" placeholder="e.g. Route 4 - Thuraiyur" required></label><button class="primary-btn">Add route</button></form>
+        </article>
+        <article class="panel">
+          <h3>Add a stop</h3>
+          <form id="stopForm"><label>Select route<select id="addRouteSelect"></select></label><label>Stop name<input id="stopName" placeholder="e.g. Thuraiyur" required></label><label>Annual fee (₹)<input id="stopFee" type="number" min="1" step="0.01" placeholder="25000" required></label><button class="primary-btn">Add stop</button></form>
+        </article>
+        <article class="panel">
+          <h3>Search a stop</h3>
+          <form id="searchForm"><label>Stop name<input id="searchName" placeholder="Enter stop name" required></label><button class="primary-btn">Search</button></form><div id="searchResult" class="result">Search results will appear here.</div>
+        </article>
+        <article class="panel">
+          <h3>Update annual fee</h3>
+          <form id="updateForm"><label>Stop name<input id="updateName" placeholder="e.g. Woraiyur" required></label><label>New fee (₹)<input id="newFee" type="number" min="1" step="0.01" required></label><button class="primary-btn">Update fee</button></form>
+        </article>
+        <article class="panel">
+          <h3>Delete a stop</h3>
+          <form id="deleteForm"><label>Stop name<input id="deleteName" placeholder="Stop to remove" required></label><button class="danger-btn">Delete stop</button></form>
+        </article>
+        <article class="panel">
+          <h3>Insert between stops</h3>
+          <form id="insertForm"><label>Route<select id="insertRouteSelect"></select></label><label>Insert after<input id="afterName" placeholder="Existing stop" required></label><label>New stop<input id="insertName" placeholder="New stop name" required></label><label>Annual fee (₹)<input id="insertFee" type="number" min="1" required></label><button class="primary-btn">Insert stop</button></form>
+        </article>
+        <article class="panel">
+          <h3>Reverse a route</h3>
+          <p class="muted">Reverse the stop order for the return / evening trip.</p>
+          <form id="reverseForm"><label>Select route<select id="reverseRouteSelect"></select></label><button class="primary-btn">Reverse route</button></form>
+        </article>
+        <article class="panel">
+          <h3>Undo last fee change</h3>
+          <p class="muted">Uses a stack (Last-In, First-Out) to restore the previous fee.</p>
+          <button id="undoBtn" class="primary-btn">Undo last update</button><div id="undoResult" class="result">No undo action yet.</div>
+        </article>
+        <article class="panel">
+          <h3>Compare two stops</h3>
+          <form id="compareForm"><label>First stop<input id="compareA" placeholder="Woraiyur" required></label><label>Second stop<input id="compareB" placeholder="Lalgudi" required></label><button class="primary-btn">Compare fees</button></form><div id="compareResult" class="result">Fee difference will appear here.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="explain">
+      <div><p class="eyebrow">HOW IT WORKS</p><h2>Data structures behind the website</h2><p>Each route node stores a route name and the head of its own stop list. Every stop node stores a stop name, annual fee and a pointer to the next stop. Fee changes are recorded in a stack so the latest change can be undone first.</p></div>
+      <div class="structure"><div class="node">HEAD</div><span>→</span><div class="node">Route node<br><small>stopHead</small></div><span>→</span><div class="node">Route node</div><span>→</span><div class="node null">NULL</div><p>Each route node points to its own chain of stop nodes.</p></div>
+    </section>
+    <footer>College Bus Route & Fare Management System <span>Data Structures Mini Project</span></footer>
+  </main>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
